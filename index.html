@@ -3,173 +3,108 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>MARVEL 4 ALL — Infinity & Beyond</title>
+<title>MARVEL 4 ALL — The True Order</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
-/* ══════════════════════════════════════
-   MARVEL 4 ALL: CINEMATIC MERGE
-   Theme: Deep Black + Force Glow
-══════════════════════════════════════ */
-
-:root {
-  --bg:       #050505;
-  --bg2:      rgba(15, 15, 15, 0.9);
-  --red:      #C0181A;
-  --blue:     #0074FF;
-  --white:    #F0F0F0;
-  --grey:     #666666;
-  --border:   rgba(255, 255, 255, 0.1);
-  --accent:   var(--red);
-  --glow:     rgba(192, 24, 26, 0.6);
-}
-
-body.light-side {
-  --accent:   var(--blue);
-  --glow:     rgba(0, 116, 255, 0.6);
-}
-
+/* STYLING REMAINING THE SAME FOR CONSISTENCY */
+:root { --bg: #050505; --bg2: rgba(15,15,15,0.9); --red: #C0181A; --blue: #0074FF; --white: #F0F0F0; --grey: #666666; --border: rgba(255,255,255,0.1); --accent: var(--red); --glow: rgba(192, 24, 26, 0.6); }
+body.light-side { --accent: var(--blue); --glow: rgba(0, 116, 255, 0.6); }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-
-body {
-  background: var(--bg);
-  background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), 
-                    url('https://wallpaperaccess.com/full/11933.jpg'); 
-  background-attachment: fixed;
-  background-size: cover;
-  background-position: center;
-  font-family: 'Barlow', sans-serif;
-  color: var(--white);
-  overflow-x: hidden;
-}
-
-body::after {
-  content: '';
-  position: fixed; inset: 0;
-  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.01) 2px, rgba(255,255,255,0.01) 4px);
-  pointer-events: none; z-index: 999;
-}
-
-.hdr { text-align: center; padding: 60px 20px 20px; position: relative; }
-
-.marvel-logo-box {
-  display: inline-block; padding: 8px 25px; background: var(--accent);
-  transform: perspective(500px) rotateX(10deg);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.5), 0 0 15px var(--glow);
-  border: 1px solid rgba(255,255,255,0.2); transition: all 0.5s ease;
-}
-
-.marvel-logo-text { font-family: 'Bebas Neue', sans-serif; font-size: clamp(60px, 12vw, 100px); letter-spacing: 2px; color: #fff; }
-
-.tagline { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 5px; color: var(--grey); text-transform: uppercase; margin-top: 15px; }
-
+body { background: var(--bg); background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), url('https://wallpaperaccess.com/full/11933.jpg'); background-attachment: fixed; background-size: cover; background-position: center; font-family: 'Barlow', sans-serif; color: var(--white); overflow-x: hidden; }
+.hdr { text-align: center; padding: 60px 20px 20px; }
+.marvel-logo-box { display: inline-block; padding: 8px 25px; background: var(--accent); transform: perspective(500px) rotateX(10deg); box-shadow: 0 10px 20px rgba(0,0,0,0.5), 0 0 15px var(--glow); border: 1px solid rgba(255,255,255,0.2); }
+.marvel-logo-text { font-family: 'Bebas Neue', sans-serif; font-size: clamp(50px, 10vw, 80px); color: #fff; }
 .prog-strip { background: rgba(0,0,0,0.5); padding: 20px; backdrop-filter: blur(5px); border-bottom: 1px solid var(--border); }
 .prog-inner { max-width: 600px; margin: 0 auto; }
-.prog-row { display: flex; justify-content: space-between; margin-bottom: 8px; }
-.prog-label { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; letter-spacing: 2px; }
-
-.saber-track { height: 4px; background: #1a1a1a; border-radius: 4px; position: relative; }
+.saber-track { height: 4px; background: #1a1a1a; border-radius: 4px; margin-top: 10px; }
 .saber-fill { height: 100%; width: 0%; background: #fff; border-radius: 4px; box-shadow: 0 0 10px #fff, 0 0 20px var(--accent); transition: width 1s ease; }
-
-.nav { display: flex; justify-content: center; gap: 5px; margin: 20px 0; flex-wrap: wrap; }
-.ntab { background: transparent; border: 1px solid var(--border); color: var(--grey); padding: 10px 20px; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; cursor: pointer; transition: 0.3s; }
-.ntab.active { background: var(--accent); color: white; border-color: var(--accent); box-shadow: 0 0 10px var(--glow); }
-
 .grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px; padding: 20px; }
-.card { background: var(--bg2); backdrop-filter: blur(10px); border: 1px solid var(--border); border-top: 3px solid var(--accent); transition: 0.3s; }
-.card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.4); border-color: var(--accent); }
-
-.card-hdr { padding: 15px 20px; border-bottom: 1px solid var(--border); }
-.card-title { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 800; text-transform: uppercase; }
-
+.card { background: var(--bg2); backdrop-filter: blur(10px); border: 1px solid var(--border); border-top: 3px solid var(--accent); }
+.card-hdr { padding: 15px 20px; border-bottom: 1px solid var(--border); background: rgba(255,255,255,0.02); }
+.card-title { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 800; text-transform: uppercase; color: var(--accent); }
 .item { display: flex; align-items: center; gap: 12px; padding: 12px 20px; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.03); }
-.item:hover { background: rgba(255,255,255,0.05); }
 .item.done { opacity: 0.3; }
-
 .chk { width: 16px; height: 16px; border: 2px solid var(--accent); display: flex; align-items: center; justify-content: center; font-size: 10px; }
 .item.done .chk { background: var(--accent); color: white; }
-
 .side-toggle { position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px; border-radius: 50%; background: var(--accent); border: 2px solid #fff; cursor: pointer; z-index: 1000; box-shadow: 0 0 15px var(--glow); display: flex; align-items: center; justify-content: center; }
-
-.page { display: none; }
-.page.active { display: block; animation: fadeIn 0.4s ease; }
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
 </style>
 </head>
 <body class="sith-side">
 
 <div class="hdr">
-  <div class="marvel-logo-box" id="logoBox"><span class="marvel-logo-text">MARVEL</span></div>
-  <div class="tagline">The Infinity Watchlist — Choose Your Side</div>
+  <div class="marvel-logo-box"><span class="marvel-logo-text">MARVEL</span></div>
 </div>
 
 <div class="prog-strip">
   <div class="prog-inner">
-    <div class="prog-row">
-      <span class="prog-label" id="sideStatus">SITH LORD PROGRESS</span>
-      <span class="prog-label" id="progPercent">0%</span>
+    <div style="display:flex; justify-content:space-between; font-size:12px;">
+      <span id="sideStatus">SITH LORD PROGRESS</span>
+      <span id="progPercent">0%</span>
     </div>
     <div class="saber-track"><div class="saber-fill" id="mainBar"></div></div>
   </div>
 </div>
 
-<div class="nav">
-  <button class="ntab active" onclick="showPage('mcu')">MCU UNIVERSE</button>
-  <button class="ntab" onclick="showPage('xmen')">X-MEN / FOX</button>
-  <button class="ntab" onclick="showPage('extra')">ANIMATED / EXTRAS</button>
-</div>
-
-<div id="page-mcu" class="page active"><div class="grid" id="mcu-grid"></div></div>
-<div id="page-xmen" class="page"><div class="grid" id="xmen-grid"></div></div>
-<div id="page-extra" class="page"><div class="grid" id="extra-grid"></div></div>
+<div class="grid" id="main-grid"></div>
 
 <button class="side-toggle" onclick="toggleSide()">
   <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M12 2L4.5 20.29L5.21 21L12 18L18.79 21L19.5 20.29L12 2Z"/></svg>
 </button>
 
 <script>
-const DATA = {
-  mcu: [
-    { title: "Phase 1: Infinity Saga", items: ["Iron Man", "The Incredible Hulk", "Iron Man 2", "Thor", "Captain America: TFA", "The Avengers"] },
-    { title: "Phase 2", items: ["Thor: Dark World", "Iron Man 3", "Winter Soldier", "Guardians Vol 1", "Age of Ultron", "Ant-Man"] },
-    { title: "Phase 3", items: ["Civil War", "Black Widow", "Black Panther", "Homecoming", "Doctor Strange", "Ragnarok", "Infinity War", "Endgame"] },
-    { title: "Phase 4 & 5", items: ["Loki", "WandaVision", "No Way Home", "Multiverse of Madness", "Wakanda Forever", "Guardians Vol 3", "Deadpool & Wolverine", "Born Again (2025)"] }
-  ],
-  xmen: [
-    { title: "The Fox Universe", items: ["First Class", "Days of Future Past", "Origins: Wolverine", "Apocalypse", "X-Men (2000)", "X2", "The Last Stand", "Logan", "Deadpool 1 & 2"] }
-  ],
-  extra: [
-    { title: "One-Shots & Shorts", items: ["Agent Carter", "All Hail the King", "I Am Groot", "Werewolf by Night"] },
-    { title: "Animated", items: ["What If...?", "X-Men '97", "Marvel Zombies (2025)"] }
-  ]
-};
+/* ── THE CORRECTED INTERWOVEN DATA ── */
+const WATCH_DATA = [
+  { 
+    title: "The Multiverse Expansion", 
+    items: [
+      "Loki: Season 1", 
+      "Ant-Man and the Wasp: Quantumania", 
+      "Loki: Season 2",
+      "WandaVision",
+      "Spider-Man: No Way Home",
+      "Doctor Strange in the Multiverse of Madness"
+    ] 
+  },
+  { 
+    title: "Street Level & New Era", 
+    items: [
+      "Daredevil: Born Again - Part 1",
+      "Spider-Man 4 (2026)",
+      "Daredevil: Born Again - Part 2"
+    ]
+  },
+  {
+    title: "Legacy & Fox Merge",
+    items: [
+      "X-Men '97: Season 1",
+      "Deadpool & Wolverine",
+      "X-Men '97: Season 2"
+    ]
+  }
+];
 
-let storage = JSON.parse(localStorage.getItem('m4a_ultra') || '{}');
+let storage = JSON.parse(localStorage.getItem('marvel_true_order') || '{}');
 
 function render() {
-  ['mcu', 'xmen', 'extra'].forEach(pageKey => {
-    const grid = document.getElementById(pageKey + '-grid');
-    grid.innerHTML = '';
-    DATA[pageKey].forEach(section => {
-      const card = document.createElement('div');
-      card.className = 'card';
-      card.innerHTML = `<div class="card-hdr"><div class="card-title">${section.title}</div></div>`;
-      section.items.forEach(movie => {
-        const id = pageKey + movie;
-        const item = document.createElement('div');
-        item.className = `item ${storage[id] ? 'done' : ''}`;
-        item.innerHTML = `<div class="chk">${storage[id] ? '✓' : ''}</div><span>${movie}</span>`;
-        item.onclick = () => {
-          storage[id] = !storage[id];
-          localStorage.setItem('m4a_ultra', JSON.stringify(storage));
-          render();
-          updateProgress();
-        };
-        card.appendChild(item);
-      });
-      grid.appendChild(card);
+  const grid = document.getElementById('main-grid');
+  grid.innerHTML = '';
+  WATCH_DATA.forEach(section => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `<div class="card-hdr"><div class="card-title">${section.title}</div></div>`;
+    section.items.forEach(movie => {
+      const item = document.createElement('div');
+      item.className = `item ${storage[movie] ? 'done' : ''}`;
+      item.innerHTML = `<div class="chk">${storage[movie] ? '✓' : ''}</div><span>${movie}</span>`;
+      item.onclick = () => {
+        storage[movie] = !storage[movie];
+        localStorage.setItem('marvel_true_order', JSON.stringify(storage));
+        render();
+        updateProgress();
+      };
+      card.appendChild(item);
     });
+    grid.appendChild(card);
   });
 }
 
@@ -179,13 +114,6 @@ function updateProgress() {
   const p = all ? Math.round((done / all) * 100) : 0;
   document.getElementById('mainBar').style.width = p + '%';
   document.getElementById('progPercent').innerText = p + '%';
-}
-
-function showPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page-' + id).classList.add('active');
-  document.querySelectorAll('.ntab').forEach(t => t.classList.toggle('active', t.innerText.toLowerCase().includes(id)));
-  updateProgress();
 }
 
 function toggleSide() {
@@ -199,4 +127,3 @@ updateProgress();
 </script>
 </body>
 </html>
-
