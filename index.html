@@ -1,129 +1,316 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>MARVEL 4 ALL — The True Order</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-<style>
-/* STYLING REMAINING THE SAME FOR CONSISTENCY */
-:root { --bg: #050505; --bg2: rgba(15,15,15,0.9); --red: #C0181A; --blue: #0074FF; --white: #F0F0F0; --grey: #666666; --border: rgba(255,255,255,0.1); --accent: var(--red); --glow: rgba(192, 24, 26, 0.6); }
-body.light-side { --accent: var(--blue); --glow: rgba(0, 116, 255, 0.6); }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { background: var(--bg); background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), url('https://wallpaperaccess.com/full/11933.jpg'); background-attachment: fixed; background-size: cover; background-position: center; font-family: 'Barlow', sans-serif; color: var(--white); overflow-x: hidden; }
-.hdr { text-align: center; padding: 60px 20px 20px; }
-.marvel-logo-box { display: inline-block; padding: 8px 25px; background: var(--accent); transform: perspective(500px) rotateX(10deg); box-shadow: 0 10px 20px rgba(0,0,0,0.5), 0 0 15px var(--glow); border: 1px solid rgba(255,255,255,0.2); }
-.marvel-logo-text { font-family: 'Bebas Neue', sans-serif; font-size: clamp(50px, 10vw, 80px); color: #fff; }
-.prog-strip { background: rgba(0,0,0,0.5); padding: 20px; backdrop-filter: blur(5px); border-bottom: 1px solid var(--border); }
-.prog-inner { max-width: 600px; margin: 0 auto; }
-.saber-track { height: 4px; background: #1a1a1a; border-radius: 4px; margin-top: 10px; }
-.saber-fill { height: 100%; width: 0%; background: #fff; border-radius: 4px; box-shadow: 0 0 10px #fff, 0 0 20px var(--accent); transition: width 1s ease; }
-.grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px; padding: 20px; }
-.card { background: var(--bg2); backdrop-filter: blur(10px); border: 1px solid var(--border); border-top: 3px solid var(--accent); }
-.card-hdr { padding: 15px 20px; border-bottom: 1px solid var(--border); background: rgba(255,255,255,0.02); }
-.card-title { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 800; text-transform: uppercase; color: var(--accent); }
-.item { display: flex; align-items: center; gap: 12px; padding: 12px 20px; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.03); }
-.item.done { opacity: 0.3; }
-.chk { width: 16px; height: 16px; border: 2px solid var(--accent); display: flex; align-items: center; justify-content: center; font-size: 10px; }
-.item.done .chk { background: var(--accent); color: white; }
-.side-toggle { position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px; border-radius: 50%; background: var(--accent); border: 2px solid #fff; cursor: pointer; z-index: 1000; box-shadow: 0 0 15px var(--glow); display: flex; align-items: center; justify-content: center; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marvel Infinity Watchlist</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;800&family=Barlow:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --marvel-red: #EC1D24;
+            --dark-bg: #101010;
+            --card-bg: #161616;
+            --border: #2a2a2a;
+            --text-grey: #8a8a8a;
+            /* Stone Colors */
+            --space: #4d8ef5; --reality: #EC1D24; --power: #9b4de0;
+            --time: #18b878; --mind: #d4a800; --soul: #e06418;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: white;
+            font-family: 'Barlow', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Top Navigation */
+        nav {
+            background: black;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-badge {
+            background: var(--marvel-red);
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 800;
+            padding: 5px 10px;
+            font-size: 20px;
+            letter-spacing: 1px;
+            margin-right: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-grey);
+            text-decoration: none;
+            font-family: 'Barlow Condensed', sans-serif;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-right: 20px;
+            font-size: 14px;
+        }
+
+        .nav-links a.active {
+            color: white;
+            border-bottom: 3px solid var(--marvel-red);
+            padding-bottom: 18px;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero h2 {
+            font-family: 'Barlow Condensed', sans-serif;
+            color: var(--marvel-red);
+            letter-spacing: 5px;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 800;
+            font-size: 48px;
+            text-transform: uppercase;
+            margin: 10px 0;
+        }
+
+        /* Infinity Stones */
+        .stones {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .stone-item {
+            text-align: center;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 10px;
+            text-transform: uppercase;
+            color: var(--text-grey);
+        }
+
+        .stone {
+            width: 18px;
+            height: 18px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            box-shadow: 0 0 10px rgba(255,255,255,0.2);
+        }
+
+        /* Progress Bar Section */
+        .main-progress {
+            background: var(--card-bg);
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .progress-track {
+            flex: 1;
+            height: 4px;
+            background: #333;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--marvel-red);
+            width: 0%; /* Will be updated by JS */
+            transition: width 0.3s;
+        }
+
+        /* List Section */
+        .list-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .phase-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 2px solid var(--marvel-red);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .phase-title h3 {
+            font-family: 'Barlow Condensed', sans-serif;
+            text-transform: uppercase;
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .movie-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .movie-item:hover {
+            background: var(--card-bg);
+        }
+
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border);
+            margin-right: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .movie-item.done .checkbox {
+            background: var(--marvel-red);
+            border-color: var(--marvel-red);
+        }
+
+        .movie-item.done .checkbox::after {
+            content: '✓';
+            color: white;
+            font-size: 14px;
+        }
+
+        .movie-info {
+            flex: 1;
+        }
+
+        .movie-title {
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .movie-year {
+            font-size: 12px;
+            color: var(--text-grey);
+        }
+
+        .movie-tag {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 10px;
+            border: 1px solid var(--text-grey);
+            padding: 2px 8px;
+            text-transform: uppercase;
+        }
+    </style>
 </head>
-<body class="sith-side">
+<body>
 
-<div class="hdr">
-  <div class="marvel-logo-box"><span class="marvel-logo-text">MARVEL</span></div>
-</div>
-
-<div class="prog-strip">
-  <div class="prog-inner">
-    <div style="display:flex; justify-content:space-between; font-size:12px;">
-      <span id="sideStatus">SITH LORD PROGRESS</span>
-      <span id="progPercent">0%</span>
+<nav>
+    <div class="logo-badge">MARVEL</div>
+    <div class="nav-links">
+        <a href="#" class="active">MCU Universe</a>
+        <a href="#">X-Men & Fan</a>
     </div>
-    <div class="saber-track"><div class="saber-fill" id="mainBar"></div></div>
-  </div>
+</nav>
+
+<header class="hero">
+    <h2>Your Complete Marvel Watch Companion</h2>
+    <h1>MARVEL STUDIOS</h1>
+    <p style="color: var(--text-grey); font-family: 'Barlow Condensed'; letter-spacing: 2px;">THE INFINITY WATCHLIST · CHRONOLOGICAL ORDER</p>
+    
+    <div class="stones">
+        <div class="stone-item"><div class="stone" style="background: var(--space);"></div>Space</div>
+        <div class="stone-item"><div class="stone" style="background: var(--reality);"></div>Reality</div>
+        <div class="stone-item"><div class="stone" style="background: var(--power);"></div>Power</div>
+        <div class="stone-item"><div class="stone" style="background: var(--time);"></div>Time</div>
+        <div class="stone-item"><div class="stone" style="background: var(--mind);"></div>Mind</div>
+        <div class="stone-item"><div class="stone" style="background: var(--soul);"></div>Soul</div>
+    </div>
+</header>
+
+<div class="main-progress">
+    <span style="font-family: 'Barlow Condensed'; font-size: 12px; letter-spacing: 1px;">MCU UNIVERSE PROGRESS</span>
+    <div class="progress-track">
+        <div class="progress-fill" id="global-progress"></div>
+    </div>
+    <span id="progress-text">0 / 64 — 0%</span>
 </div>
 
-<div class="grid" id="main-grid"></div>
+<div class="list-container">
+    <div class="phase-header">
+        <div class="phase-title">
+            <span style="color: var(--marvel-red); font-size: 10px; font-weight: 800; letter-spacing: 2px;">PHASE 1 · SPACE STONE</span>
+            <h3>THE INFINITY SAGA BEGINS</h3>
+        </div>
+        <div style="font-family: 'Barlow Condensed'; font-size: 32px; font-weight: 800;">0%</div>
+    </div>
 
-<button class="side-toggle" onclick="toggleSide()">
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M12 2L4.5 20.29L5.21 21L12 18L18.79 21L19.5 20.29L12 2Z"/></svg>
-</button>
+    <div id="movie-list">
+        </div>
+</div>
 
 <script>
-/* ── THE CORRECTED INTERWOVEN DATA ── */
-const WATCH_DATA = [
-  { 
-    title: "The Multiverse Expansion", 
-    items: [
-      "Loki: Season 1", 
-      "Ant-Man and the Wasp: Quantumania", 
-      "Loki: Season 2",
-      "WandaVision",
-      "Spider-Man: No Way Home",
-      "Doctor Strange in the Multiverse of Madness"
-    ] 
-  },
-  { 
-    title: "Street Level & New Era", 
-    items: [
-      "Daredevil: Born Again - Part 1",
-      "Spider-Man 4 (2026)",
-      "Daredevil: Born Again - Part 2"
-    ]
-  },
-  {
-    title: "Legacy & Fox Merge",
-    items: [
-      "X-Men '97: Season 1",
-      "Deadpool & Wolverine",
-      "X-Men '97: Season 2"
-    ]
-  }
-];
+    // Sample Data
+    const movies = [
+        { title: "Captain America: The First Avenger", year: "1942", type: "Movie" },
+        { title: "Captain Marvel", year: "1995", type: "Movie" },
+        { title: "Iron Man", year: "2008", type: "Movie" },
+        { title: "Iron Man 2", year: "2010", type: "Movie" },
+        { title: "The Incredible Hulk", year: "2008", type: "Movie" },
+        { title: "Thor", year: "2011", type: "Movie" },
+        { title: "The Avengers", year: "2012", type: "Movie" }
+    ];
 
-let storage = JSON.parse(localStorage.getItem('marvel_true_order') || '{}');
+    const listElement = document.getElementById('movie-list');
+    let completedCount = 0;
 
-function render() {
-  const grid = document.getElementById('main-grid');
-  grid.innerHTML = '';
-  WATCH_DATA.forEach(section => {
-    const card = document.createElement('div');
-    card.className = 'card';
-    card.innerHTML = `<div class="card-hdr"><div class="card-title">${section.title}</div></div>`;
-    section.items.forEach(movie => {
-      const item = document.createElement('div');
-      item.className = `item ${storage[movie] ? 'done' : ''}`;
-      item.innerHTML = `<div class="chk">${storage[movie] ? '✓' : ''}</div><span>${movie}</span>`;
-      item.onclick = () => {
-        storage[movie] = !storage[movie];
-        localStorage.setItem('marvel_true_order', JSON.stringify(storage));
-        render();
-        updateProgress();
-      };
-      card.appendChild(item);
-    });
-    grid.appendChild(card);
-  });
-}
+    function updateProgress() {
+        const percent = Math.round((completedCount / movies.length) * 100);
+        document.getElementById('global-progress').style.width = percent + '%';
+        document.getElementById('progress-text').innerText = `${completedCount} / ${movies.length} — ${percent}%`;
+    }
 
-function updateProgress() {
-  const all = document.querySelectorAll('.item').length;
-  const done = document.querySelectorAll('.item.done').length;
-  const p = all ? Math.round((done / all) * 100) : 0;
-  document.getElementById('mainBar').style.width = p + '%';
-  document.getElementById('progPercent').innerText = p + '%';
-}
+    function renderMovies() {
+        listElement.innerHTML = '';
+        movies.forEach((movie, index) => {
+            const div = document.createElement('div');
+            div.className = 'movie-item';
+            div.innerHTML = `
+                <div class="checkbox"></div>
+                <div class="movie-info">
+                    <div class="movie-title">${movie.title}</div>
+                    <div class="movie-year">${movie.year}</div>
+                </div>
+                <div class="movie-tag">${movie.type}</div>
+            `;
+            
+            div.onclick = () => {
+                div.classList.toggle('done');
+                if (div.classList.contains('done')) {
+                    completedCount++;
+                } else {
+                    completedCount--;
+                }
+                updateProgress();
+            };
+            
+            listElement.appendChild(div);
+        });
+    }
 
-function toggleSide() {
-  document.body.classList.toggle('light-side');
-  const isJedi = document.body.classList.contains('light-side');
-  document.getElementById('sideStatus').innerText = isJedi ? "JEDI KNIGHT PROGRESS" : "SITH LORD PROGRESS";
-}
-
-render();
-updateProgress();
+    renderMovies();
+    updateProgress();
 </script>
+
 </body>
 </html>
