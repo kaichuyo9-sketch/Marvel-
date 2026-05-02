@@ -1,316 +1,885 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marvel Infinity Watchlist</title>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;800&family=Barlow:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --marvel-red: #EC1D24;
-            --dark-bg: #101010;
-            --card-bg: #161616;
-            --border: #2a2a2a;
-            --text-grey: #8a8a8a;
-            --space: #4d8ef5; --reality: #EC1D24; --power: #9b4de0;
-            --time: #18b878; --mind: #d4a800; --soul: #e06418;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Marvel 4 All</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Oswald:wght@400;600;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #EC1D24;
+    --yellow: #FFD700;
+    --blue: #1A5BFF;
+    --white: #FFFDF0;
+    --black: #0D0D0D;
+    --ink: #1a1a1a;
+    --panel: #FFFDF0;
+    --panel2: #FFF5C0;
+    --panel3: #E8F4FF;
+    --outline: 3px solid #0D0D0D;
+    --shadow: 4px 4px 0px #0D0D0D;
+  }
 
-        body {
-            background-color: var(--dark-bg);
-            color: white;
-            font-family: 'Barlow', sans-serif;
-            margin: 0;
-            padding: 0;
-        }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        nav {
-            background: black;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            padding: 10px 20px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+  body {
+    font-family: 'Oswald', sans-serif;
+    background-color: #f0e8d0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(0,0,0,0.08) 39px, rgba(0,0,0,0.08) 40px),
+      repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(0,0,0,0.08) 39px, rgba(0,0,0,0.08) 40px);
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
 
-        .logo-badge {
-            background: var(--marvel-red);
-            font-family: 'Barlow Condensed', sans-serif;
-            font-weight: 800;
-            padding: 5px 10px;
-            font-size: 20px;
-            letter-spacing: 1px;
-            margin-right: 30px;
-        }
+  /* ── HALFTONE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(0,0,0,0.06) 1px, transparent 1px);
+    background-size: 6px 6px;
+    pointer-events: none;
+    z-index: 0;
+  }
 
-        .nav-links a {
-            color: var(--text-grey);
-            text-decoration: none;
-            font-family: 'Barlow Condensed', sans-serif;
-            text-transform: uppercase;
-            font-weight: 700;
-            margin-right: 20px;
-            font-size: 14px;
-        }
+  /* ── HEADER ── */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--red);
+    border-bottom: 4px solid var(--black);
+    box-shadow: 0 4px 0 var(--black);
+  }
 
-        .nav-links a.active {
-            color: white;
-            border-bottom: 3px solid var(--marvel-red);
-            padding-bottom: 18px;
-        }
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    gap: 12px;
+  }
 
-        .hero {
-            text-align: center;
-            padding: 60px 20px;
-            border-bottom: 1px solid var(--border);
-        }
+  .logo {
+    font-family: 'Bangers', cursive;
+    font-size: 32px;
+    letter-spacing: 3px;
+    color: var(--white);
+    text-shadow: 3px 3px 0 var(--black), -1px -1px 0 var(--black);
+    white-space: nowrap;
+  }
 
-        .hero h2 {
-            font-family: 'Barlow Condensed', sans-serif;
-            color: var(--marvel-red);
-            letter-spacing: 5px;
-            font-size: 12px;
-            text-transform: uppercase;
-        }
+  .logo span {
+    color: var(--yellow);
+    text-shadow: 3px 3px 0 var(--black), -1px -1px 0 var(--black);
+  }
 
-        .hero h1 {
-            font-family: 'Barlow Condensed', sans-serif;
-            font-weight: 800;
-            font-size: 48px;
-            text-transform: uppercase;
-            margin: 10px 0;
-        }
+  nav { display: flex; gap: 8px; flex-wrap: nowrap; }
 
-        .stones {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            margin-top: 30px;
-        }
+  .tab-btn {
+    font-family: 'Bangers', cursive;
+    font-size: 15px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    border: 3px solid var(--black);
+    background: var(--yellow);
+    color: var(--black);
+    cursor: pointer;
+    transition: all 0.1s;
+    box-shadow: 3px 3px 0 var(--black);
+    white-space: nowrap;
+    -webkit-appearance: none;
+    transform: skewX(-4deg);
+  }
 
-        .stone-item {
-            text-align: center;
-            font-family: 'Barlow Condensed', sans-serif;
-            font-size: 10px;
-            text-transform: uppercase;
-            color: var(--text-grey);
-        }
+  .tab-btn:hover { background: var(--white); transform: skewX(-4deg) translate(-1px, -1px); box-shadow: 4px 4px 0 var(--black); }
+  .tab-btn.active { background: var(--black); color: var(--yellow); box-shadow: none; transform: skewX(-4deg) translate(2px, 2px); }
 
-        .stone {
-            width: 18px;
-            height: 18px;
-            border-radius: 4px;
-            margin-bottom: 8px;
-            box-shadow: 0 0 10px rgba(255,255,255,0.2);
-        }
+  /* ── PROGRESS BAR ── */
+  .progress-bar-wrap {
+    background: var(--yellow);
+    border-bottom: 3px solid var(--black);
+    padding: 8px 20px;
+  }
 
-        .main-progress {
-            background: var(--card-bg);
-            padding: 20px;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
+  .progress-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
 
-        .progress-track {
-            flex: 1;
-            height: 4px;
-            background: #333;
-        }
+  .progress-label {
+    font-family: 'Bangers', cursive;
+    font-size: 15px;
+    letter-spacing: 2px;
+    color: var(--black);
+    white-space: nowrap;
+  }
 
-        .progress-fill {
-            height: 100%;
-            background: var(--marvel-red);
-            width: 0%;
-            transition: width 0.3s;
-        }
+  .progress-track {
+    flex: 1;
+    height: 14px;
+    background: var(--white);
+    border: 3px solid var(--black);
+    border-radius: 0;
+    overflow: hidden;
+  }
 
-        .list-container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
+  .progress-fill {
+    height: 100%;
+    background: repeating-linear-gradient(
+      -45deg,
+      var(--red),
+      var(--red) 6px,
+      #c00 6px,
+      #c00 12px
+    );
+    transition: width 0.4s ease;
+    width: 0%;
+  }
 
-        .phase-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            border-bottom: 2px solid var(--marvel-red);
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
+  .progress-count {
+    font-family: 'Bangers', cursive;
+    font-size: 15px;
+    color: var(--black);
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
 
-        .phase-title h3 {
-            font-family: 'Barlow Condensed', sans-serif;
-            text-transform: uppercase;
-            margin: 0;
-            font-size: 24px;
-        }
+  /* ── HERO BANNER ── */
+  .hero {
+    background: var(--blue);
+    border-bottom: 4px solid var(--black);
+    padding: 50px 20px 44px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
 
-        .movie-item {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            border-bottom: 1px solid var(--border);
-            cursor: pointer;
-            transition: background 0.2s;
-        }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,0.04) 0px,
+      rgba(255,255,255,0.04) 2px,
+      transparent 2px,
+      transparent 10px
+    );
+  }
 
-        .movie-item:hover {
-            background: var(--card-bg);
-        }
+  /* Speech bubble effect behind title */
+  .hero-bubble {
+    display: inline-block;
+    background: var(--yellow);
+    border: 4px solid var(--black);
+    padding: 10px 30px 14px;
+    box-shadow: 6px 6px 0 var(--black);
+    position: relative;
+    margin-bottom: 10px;
+  }
 
-        .checkbox {
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--border);
-            margin-right: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+  .hero-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 14px solid transparent;
+    border-right: 14px solid transparent;
+    border-top: 18px solid var(--black);
+  }
 
-        .movie-item.done .checkbox {
-            background: var(--marvel-red);
-            border-color: var(--marvel-red);
-        }
+  .hero-bubble::before {
+    content: '';
+    position: absolute;
+    bottom: -17px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 11px solid transparent;
+    border-right: 11px solid transparent;
+    border-top: 14px solid var(--yellow);
+    z-index: 1;
+  }
 
-        .movie-item.done .checkbox::after {
-            content: '✓';
-            color: white;
-            font-size: 14px;
-        }
+  .hero-title {
+    font-family: 'Bangers', cursive;
+    font-size: clamp(44px, 10vw, 90px);
+    letter-spacing: 8px;
+    line-height: 0.9;
+    color: var(--black);
+  }
 
-        .movie-info {
-            flex: 1;
-        }
+  .hero-sub {
+    font-family: 'Bangers', cursive;
+    font-size: 18px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-top: 28px;
+    text-shadow: 2px 2px 0 var(--black);
+  }
 
-        .movie-title {
-            font-weight: 600;
-            font-size: 16px;
-        }
+  /* ── PAGE SECTIONS ── */
+  .page { display: none; }
+  .page.active { display: block; }
 
-        .movie-year {
-            font-size: 12px;
-            color: var(--text-grey);
-        }
+  /* ── SECTION HEADER ── */
+  .section-header {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 36px 20px 20px;
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+  }
 
-        .movie-tag {
-            font-family: 'Barlow Condensed', sans-serif;
-            font-size: 10px;
-            border: 1px solid var(--text-grey);
-            padding: 2px 8px;
-            text-transform: uppercase;
-        }
+  .section-title {
+    font-family: 'Bangers', cursive;
+    font-size: 40px;
+    letter-spacing: 4px;
+    color: var(--black);
+    text-shadow: 3px 3px 0 var(--red);
+  }
 
-        .empty-state {
-            text-align: center;
-            color: var(--text-grey);
-            padding: 40px;
-            border: 1px dashed var(--border);
-        }
-    </style>
+  .section-count {
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    opacity: 0.6;
+    letter-spacing: 1px;
+  }
+
+  /* ── PHASE BADGE ── */
+  .phase-divider {
+    max-width: 1100px;
+    margin: 28px auto 10px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .phase-label {
+    font-family: 'Bangers', cursive;
+    font-size: 14px;
+    letter-spacing: 3px;
+    color: var(--white);
+    white-space: nowrap;
+    background: var(--black);
+    border: 3px solid var(--black);
+    padding: 4px 14px;
+    box-shadow: 3px 3px 0 var(--red);
+    transform: skewX(-4deg);
+    display: inline-block;
+  }
+
+  .phase-line {
+    flex: 1;
+    height: 3px;
+    background: var(--black);
+  }
+
+  /* ── GRID ── */
+  .grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 4px 16px 24px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 12px;
+  }
+
+  /* ── ITEM CARD ── */
+  .item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--panel);
+    border: 3px solid var(--black);
+    padding: 12px 14px;
+    cursor: pointer;
+    transition: all 0.1s;
+    -webkit-user-select: none;
+    user-select: none;
+    position: relative;
+    box-shadow: 4px 4px 0 var(--black);
+  }
+
+  .item:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--black);
+    background: var(--panel2);
+  }
+
+  .item:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--black); }
+
+  .item.watched {
+    background: var(--panel2);
+    border-color: var(--red);
+    box-shadow: 4px 4px 0 var(--red);
+  }
+
+  /* ── NUMBER ── */
+  .item-num {
+    font-family: 'Bangers', cursive;
+    font-size: 26px;
+    color: rgba(0,0,0,0.25);
+    min-width: 34px;
+    text-align: center;
+    line-height: 1;
+    transition: color 0.2s;
+  }
+
+  .item.watched .item-num { color: var(--red); }
+
+  /* ── CHECKBOX ── */
+  .checkbox {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    border: 3px solid var(--black);
+    background: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    flex-shrink: 0;
+    box-shadow: 2px 2px 0 var(--black);
+  }
+
+  .item.watched .checkbox {
+    background: var(--red);
+    border-color: var(--black);
+    box-shadow: 2px 2px 0 var(--black);
+  }
+
+  .checkbox svg {
+    opacity: 0;
+    transform: scale(0.3) rotate(-10deg);
+    transition: all 0.15s;
+  }
+
+  .item.watched .checkbox svg {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+
+  /* ── ITEM INFO ── */
+  .item-info { flex: 1; min-width: 0; }
+
+  .item-title {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--ink);
+    line-height: 1.3;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .item.watched .item-title { color: var(--black); }
+
+  .item-meta {
+    font-size: 11px;
+    color: #555;
+    margin-top: 4px;
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    align-items: center;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 400;
+  }
+
+  .badge {
+    display: inline-block;
+    font-family: 'Bangers', cursive;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 1px 7px;
+    border: 2px solid var(--black);
+    background: var(--yellow);
+    color: var(--black);
+    transform: skewX(-4deg);
+  }
+
+  .badge.show { background: #1A5BFF; color: #fff; border-color: var(--black); }
+  .badge.upcoming { background: #aaa; color: #fff; border-color: var(--black); }
+  .badge.animated { background: #22bb66; color: #fff; border-color: var(--black); }
+
+  /* ── SUBSECTION HEADERS ── */
+  .sub-header {
+    max-width: 1100px;
+    margin: 32px auto 8px;
+    padding: 0 20px;
+  }
+
+  .sub-title {
+    font-family: 'Bangers', cursive;
+    font-size: 32px;
+    letter-spacing: 3px;
+    color: var(--black);
+    text-shadow: 2px 2px 0 var(--blue);
+    padding-bottom: 8px;
+    border-bottom: 3px solid var(--black);
+  }
+
+  .sub-note {
+    font-size: 13px;
+    font-weight: 600;
+    color: #555;
+    margin-top: 6px;
+    line-height: 1.5;
+    font-family: 'Oswald', sans-serif;
+  }
+
+  /* ── ACTION BUTTONS ── */
+  .actions {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px 50px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    font-family: 'Bangers', cursive;
+    font-size: 15px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 10px 22px;
+    border: 3px solid var(--black);
+    background: var(--white);
+    color: var(--black);
+    cursor: pointer;
+    transition: all 0.1s;
+    box-shadow: 4px 4px 0 var(--black);
+    -webkit-appearance: none;
+    transform: skewX(-3deg);
+  }
+
+  .btn:hover { transform: skewX(-3deg) translate(-2px, -2px); box-shadow: 6px 6px 0 var(--black); background: var(--yellow); }
+  .btn.danger:hover { background: var(--red); color: var(--white); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 4px solid var(--black);
+    padding: 20px;
+    text-align: center;
+    font-family: 'Bangers', cursive;
+    font-size: 16px;
+    letter-spacing: 3px;
+    color: var(--black);
+    background: var(--yellow);
+  }
+
+  footer span { color: var(--red); }
+
+  /* ── MOBILE ── */
+  @media (max-width: 600px) {
+    .logo { font-size: 24px; }
+    .tab-btn { font-size: 12px; padding: 7px 10px; }
+    .grid { grid-template-columns: 1fr; padding: 4px 12px 20px; }
+    .section-title { font-size: 30px; }
+    .hero-title { font-size: 48px; }
+  }
+</style>
 </head>
 <body>
 
-<nav>
-    <div class="logo-badge">MARVEL</div>
-    <div class="nav-links">
-        <a href="#" class="active">MCU Universe</a>
-        <a href="#">X-Men & Fan</a>
-    </div>
-</nav>
-
-<header class="hero">
-    <h2>Your Complete Marvel Watch Companion</h2>
-    <h1>MARVEL STUDIOS</h1>
-    <p style="color: var(--text-grey); font-family: 'Barlow Condensed'; letter-spacing: 2px;">THE INFINITY WATCHLIST · CHRONOLOGICAL ORDER</p>
-    
-    <div class="stones">
-        <div class="stone-item"><div class="stone" style="background: var(--space);"></div>Space</div>
-        <div class="stone-item"><div class="stone" style="background: var(--reality);"></div>Reality</div>
-        <div class="stone-item"><div class="stone" style="background: var(--power);"></div>Power</div>
-        <div class="stone-item"><div class="stone" style="background: var(--time);"></div>Time</div>
-        <div class="stone-item"><div class="stone" style="background: var(--mind);"></div>Mind</div>
-        <div class="stone-item"><div class="stone" style="background: var(--soul);"></div>Soul</div>
-    </div>
+<header>
+  <div class="header-inner">
+    <div class="logo">The Marvel <span>4</span> All</div>
+    <nav>
+      <button class="tab-btn active" onclick="showPage('mcu')">MCU</button>
+      <button class="tab-btn" onclick="showPage('xmen')">X-Men &amp; F4</button>
+      <button class="tab-btn" onclick="showPage('extras')">Extras</button>
+    </nav>
+  </div>
 </header>
 
-<div class="main-progress">
-    <span style="font-family: 'Barlow Condensed'; font-size: 12px; letter-spacing: 1px;">MCU UNIVERSE PROGRESS</span>
-    <div class="progress-track">
-        <div class="progress-fill" id="global-progress"></div>
-    </div>
-    <span id="progress-text">0 / 0 — 0%</span>
+<div class="progress-bar-wrap">
+  <div class="progress-inner">
+    <div class="progress-label" id="progressLabel">MCU PROGRESS</div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-count" id="progressCount">0 / 0</div>
+  </div>
 </div>
 
-<div class="list-container">
-    <div class="phase-header">
-        <div class="phase-title">
-            <span style="color: var(--marvel-red); font-size: 10px; font-weight: 800; letter-spacing: 2px;">YOUR CUSTOM LIST</span>
-            <h3>WATCHLIST ENTRIES</h3>
-        </div>
-        <div id="phase-percent" style="font-family: 'Barlow Condensed'; font-size: 32px; font-weight: 800;">0%</div>
+<!-- PAGE 1: MCU -->
+<div class="page active" id="page-mcu">
+  <div class="hero">
+    <div class="hero-bubble">
+      <div class="hero-title">Marvel Cinematic<br>Universe</div>
     </div>
-
-    <div id="movie-list">
-        <div class="empty-state">No movies added yet. Edit the code to add your favorites!</div>
-    </div>
+    <div class="hero-sub">Complete Chronological Watch Order</div>
+  </div>
+  <div class="section-header">
+    <div class="section-title">All MCU Titles</div>
+    <div class="section-count">77 titles in chronological order</div>
+  </div>
+  <div class="phase-divider"><span class="phase-label">Ancient / Pre-MCU Era</span><div class="phase-line"></div></div>
+  <div class="grid" id="mcu-grid-1"></div>
+  <div class="phase-divider"><span class="phase-label">Phase 1 — The Infinity Saga Begins</span><div class="phase-line"></div></div>
+  <div class="grid" id="mcu-grid-2"></div>
+  <div class="phase-divider"><span class="phase-label">Phase 2</span><div class="phase-line"></div></div>
+  <div class="grid" id="mcu-grid-3"></div>
+  <div class="phase-divider"><span class="phase-label">Phase 3</span><div class="phase-line"></div></div>
+  <div class="grid" id="mcu-grid-4"></div>
+  <div class="phase-divider"><span class="phase-label">Post-Endgame / Phase 4 &amp; 5</span><div class="phase-line"></div></div>
+  <div class="grid" id="mcu-grid-5"></div>
+  <div class="phase-divider"><span class="phase-label">Phase 6 — The Multiverse Saga Ends</span><div class="phase-line"></div></div>
+  <div class="grid" id="mcu-grid-6"></div>
+  <div class="actions">
+    <button class="btn danger" onclick="resetPage('mcu')">Reset MCU Progress</button>
+  </div>
 </div>
+
+<!-- PAGE 2: X-MEN & F4 -->
+<div class="page" id="page-xmen">
+  <div class="hero">
+    <div class="hero-bubble">
+      <div class="hero-title">X-Men &amp;<br>Fantastic Four</div>
+    </div>
+    <div class="hero-sub">Fox Universe + MCU Entry</div>
+  </div>
+  <div class="sub-header">
+    <div class="sub-title">X-Men Universe — Chronological Order</div>
+    <div class="sub-note">14 films spanning the Fox X-Men universe. Deadpool &amp; Wolverine connects to the MCU.</div>
+  </div>
+  <div class="grid" id="xmen-grid"></div>
+  <div class="sub-header">
+    <div class="sub-title">Fantastic Four — All Movies</div>
+    <div class="sub-note">From the unreleased 1994 film to the MCU's First Steps. Note: F1–F4 are non-MCU.</div>
+  </div>
+  <div class="grid" id="f4-grid"></div>
+  <div class="actions">
+    <button class="btn danger" onclick="resetPage('xmen')">Reset X-Men &amp; F4 Progress</button>
+  </div>
+</div>
+
+<!-- PAGE 3: EXTRAS -->
+<div class="page" id="page-extras">
+  <div class="hero">
+    <div class="hero-bubble">
+      <div class="hero-title">MCU Extras</div>
+    </div>
+    <div class="hero-sub">One-Shots, Specials &amp; Animated Shorts</div>
+  </div>
+  <div class="sub-header">
+    <div class="sub-title">Marvel One-Shots</div>
+    <div class="sub-note">Short films included as Blu-ray bonus features. Totally optional but fun!</div>
+  </div>
+  <div class="grid" id="oneshot-grid"></div>
+  <div class="sub-header">
+    <div class="sub-title">Disney+ Specials &amp; Shorts</div>
+    <div class="sub-note">TV specials and animated short series on Disney+.</div>
+  </div>
+  <div class="grid" id="specials-grid"></div>
+  <div class="sub-header">
+    <div class="sub-title">Animated Series</div>
+    <div class="sub-note">MCU-connected animated shows on Disney+.</div>
+  </div>
+  <div class="grid" id="animated-grid"></div>
+  <div class="actions">
+    <button class="btn danger" onclick="resetPage('extras')">Reset Extras Progress</button>
+  </div>
+</div>
+
+<footer>
+  Made with <span>♥</span> for Marvel Fans &nbsp;·&nbsp; The Marvel 4 All
+</footer>
 
 <script>
-    /* HOW TO ADD MOVIES:
-       Add your items inside the brackets below using this format:
-       { title: "Movie Name", year: "Release Year", type: "Movie or Series" },
-    */
-    const movies = [
-        // Example: { title: "Iron Man", year: "2008", type: "Movie" },
-    ];
+const mcuPhases = {
+  1: [
+    { n:1, title:"Eyes of Wakanda", year:"2025", type:"animated", note:"Ancient Wakanda history" },
+    { n:2, title:"Captain America: The First Avenger", year:"2011", type:"movie", note:"Set in 1942" },
+    { n:3, title:"The Fantastic Four: First Steps", year:"2025", type:"movie", note:"Set in the 1960s" },
+    { n:4, title:"Captain Marvel", year:"2019", type:"movie", note:"Set in 1995" },
+  ],
+  2: [
+    { n:5, title:"Iron Man", year:"2008", type:"movie" },
+    { n:6, title:"Iron Man 2", year:"2010", type:"movie" },
+    { n:7, title:"The Incredible Hulk", year:"2008", type:"movie" },
+    { n:8, title:"Thor", year:"2011", type:"movie" },
+    { n:9, title:"Marvel's The Avengers", year:"2012", type:"movie" },
+  ],
+  3: [
+    { n:10, title:"Thor: The Dark World", year:"2013", type:"movie" },
+    { n:11, title:"Iron Man 3", year:"2013", type:"movie" },
+    { n:12, title:"Captain America: The Winter Soldier", year:"2014", type:"movie" },
+    { n:13, title:"Guardians of the Galaxy", year:"2014", type:"movie" },
+    { n:14, title:"I Am Groot", year:"2022", type:"show", note:"Animated shorts" },
+    { n:15, title:"Guardians of the Galaxy Vol. 2", year:"2017", type:"movie" },
+    { n:16, title:"Marvel's Daredevil S1", year:"2015", type:"show", note:"Netflix" },
+    { n:17, title:"Marvel's Jessica Jones S1", year:"2015", type:"show", note:"Netflix" },
+    { n:18, title:"Avengers: Age of Ultron", year:"2015", type:"movie" },
+    { n:19, title:"Ant-Man", year:"2015", type:"movie" },
+    { n:20, title:"Marvel's Daredevil S2", year:"2016", type:"show", note:"Netflix" },
+    { n:21, title:"Marvel's Luke Cage S1", year:"2016", type:"show", note:"Netflix" },
+    { n:22, title:"Marvel's Iron Fist S1", year:"2017", type:"show", note:"Netflix" },
+    { n:23, title:"Marvel's The Defenders S1", year:"2017", type:"show", note:"Netflix" },
+  ],
+  4: [
+    { n:24, title:"Captain America: Civil War", year:"2016", type:"movie" },
+    { n:25, title:"Your Friendly Neighborhood Spider-Man S1", year:"2025", type:"animated", note:"Alternate timeline" },
+    { n:26, title:"Black Widow", year:"2021", type:"movie", note:"Set post-Civil War" },
+    { n:27, title:"Black Panther", year:"2018", type:"movie" },
+    { n:28, title:"Spider-Man: Homecoming", year:"2017", type:"movie" },
+    { n:29, title:"Marvel's The Punisher S1", year:"2017", type:"show", note:"Netflix" },
+    { n:30, title:"Marvel's Jessica Jones S2", year:"2018", type:"show", note:"Netflix" },
+    { n:31, title:"Marvel's Luke Cage S2", year:"2018", type:"show", note:"Netflix" },
+    { n:32, title:"Marvel's Iron Fist S2", year:"2018", type:"show", note:"Netflix" },
+    { n:33, title:"Marvel's Daredevil S3", year:"2018", type:"show", note:"Netflix" },
+    { n:34, title:"Marvel's The Punisher S2", year:"2019", type:"show", note:"Netflix" },
+    { n:35, title:"Marvel's Jessica Jones S3", year:"2019", type:"show", note:"Netflix" },
+    { n:36, title:"Doctor Strange", year:"2016", type:"movie" },
+    { n:37, title:"Thor: Ragnarok", year:"2017", type:"movie" },
+    { n:38, title:"Ant-Man and The Wasp", year:"2018", type:"movie" },
+    { n:39, title:"Avengers: Infinity War", year:"2018", type:"movie" },
+    { n:40, title:"Avengers: Endgame", year:"2019", type:"movie" },
+  ],
+  5: [
+    { n:41, title:"Marvel Zombies S1", year:"2025", type:"animated", note:"Animated" },
+    { n:42, title:"WandaVision S1", year:"2021", type:"show" },
+    { n:43, title:"Loki S1", year:"2021", type:"show" },
+    { n:44, title:"Deadpool & Wolverine", year:"2024", type:"movie", note:"Connects X-Men to MCU" },
+    { n:45, title:"Shang-Chi and the Legend of the Ten Rings", year:"2021", type:"movie" },
+    { n:46, title:"The Falcon and the Winter Soldier", year:"2021", type:"show" },
+    { n:47, title:"Spider-Man: Far From Home", year:"2019", type:"movie" },
+    { n:48, title:"Eternals", year:"2021", type:"movie" },
+    { n:49, title:"Spider-Man: No Way Home", year:"2021", type:"movie" },
+    { n:50, title:"Doctor Strange in the Multiverse of Madness", year:"2022", type:"movie" },
+    { n:51, title:"Hawkeye", year:"2021", type:"show" },
+    { n:52, title:"What If...? S1", year:"2021", type:"animated" },
+    { n:53, title:"What If...? S2", year:"2023", type:"animated" },
+    { n:54, title:"What If...? S3", year:"2024", type:"animated" },
+    { n:55, title:"Moon Knight", year:"2022", type:"show" },
+    { n:56, title:"She-Hulk: Attorney at Law", year:"2022", type:"show" },
+    { n:57, title:"Ms. Marvel", year:"2022", type:"show" },
+    { n:58, title:"Thor: Love and Thunder", year:"2022", type:"movie" },
+    { n:59, title:"Black Panther: Wakanda Forever", year:"2022", type:"movie" },
+    { n:60, title:"The Guardians of the Galaxy Holiday Special", year:"2022", type:"show", note:"TV Special" },
+    { n:61, title:"Secret Invasion", year:"2023", type:"show" },
+    { n:62, title:"Ant-Man and the Wasp: Quantumania", year:"2023", type:"movie" },
+    { n:63, title:"Guardians of the Galaxy Vol. 3", year:"2023", type:"movie" },
+    { n:64, title:"Loki S2", year:"2023", type:"show" },
+    { n:65, title:"Echo", year:"2024", type:"show" },
+    { n:66, title:"Agatha All Along", year:"2024", type:"show" },
+    { n:67, title:"The Marvels", year:"2023", type:"movie" },
+    { n:68, title:"Ironheart", year:"2025", type:"show" },
+    { n:69, title:"Daredevil: Born Again S1", year:"2025", type:"show" },
+    { n:70, title:"Captain America: Brave New World", year:"2025", type:"movie" },
+    { n:71, title:"Thunderbolts*", year:"2025", type:"movie" },
+  ],
+  6: [
+    { n:72, title:"Wonder Man S1", year:"2026", type:"show", upcoming:true },
+    { n:73, title:"Daredevil: Born Again S2", year:"2026", type:"show", upcoming:true },
+    { n:74, title:"VisionQuest", year:"2026", type:"show", upcoming:true },
+    { n:75, title:"Spider-Man: Brand New Day", year:"2026", type:"movie", upcoming:true },
+    { n:76, title:"Avengers: Doomsday", year:"2026", type:"movie", upcoming:true },
+    { n:77, title:"Avengers: Secret Wars", year:"2027", type:"movie", upcoming:true },
+  ]
+};
 
-    const listElement = document.getElementById('movie-list');
-    let completedCount = 0;
+const xmenData = [
+  { n:"X1", title:"X-Men: First Class", year:"2011", note:"Set in 1962" },
+  { n:"X2", title:"X-Men: Days of Future Past", year:"2014", note:"Set in 1973 / future" },
+  { n:"X3", title:"X-Men Origins: Wolverine", year:"2009", note:"Set in 1979" },
+  { n:"X4", title:"X-Men: Apocalypse", year:"2016", note:"Set in 1983" },
+  { n:"X5", title:"X-Men: Dark Phoenix", year:"2019", note:"Set in 1992" },
+  { n:"X6", title:"X-Men", year:"2000", note:"Set in 2000" },
+  { n:"X7", title:"X2: X-Men United", year:"2003", note:"Set in 2003" },
+  { n:"X8", title:"X-Men: The Last Stand", year:"2006", note:"Set in 2006" },
+  { n:"X9", title:"The Wolverine", year:"2013", note:"Set in 2013" },
+  { n:"X10", title:"Deadpool", year:"2016", note:"Set in 2016" },
+  { n:"X11", title:"The New Mutants", year:"2020", note:"Set in 2017" },
+  { n:"X12", title:"Deadpool 2", year:"2018", note:"Set in 2018" },
+  { n:"X13", title:"Logan", year:"2017", note:"Set in 2029" },
+  { n:"X14", title:"Deadpool & Wolverine", year:"2024", note:"Bridges X-Men → MCU ⭐" },
+];
 
-    function updateProgress() {
-        const total = movies.length;
-        const percent = total > 0 ? Math.round((completedCount / total) * 100) : 0;
-        
-        document.getElementById('global-progress').style.width = percent + '%';
-        document.getElementById('progress-text').innerText = `${completedCount} / ${total} — ${percent}%`;
-        document.getElementById('phase-percent').innerText = `${percent}%`;
-    }
+const f4Data = [
+  { n:"F1", title:"The Fantastic Four (1994)", year:"1994", note:"Unreleased — available on YouTube" },
+  { n:"F2", title:"Fantastic Four", year:"2005", note:"Fox — Ioan Gruffudd, Chris Evans" },
+  { n:"F3", title:"Fantastic Four: Rise of the Silver Surfer", year:"2007", note:"Fox — Silver Surfer & Galactus" },
+  { n:"F4", title:"Fantastic Four / Fant4stic", year:"2015", note:"Fox reboot — Miles Teller" },
+  { n:"F5", title:"The Fantastic Four: First Steps", year:"2025", note:"MCU ⭐ — Pedro Pascal (also on MCU list)" },
+];
 
-    function renderMovies() {
-        if (movies.length === 0) return;
-        
-        listElement.innerHTML = '';
-        movies.forEach((movie, index) => {
-            const div = document.createElement('div');
-            div.className = 'movie-item';
-            div.innerHTML = `
-                <div class="checkbox"></div>
-                <div class="movie-info">
-                    <div class="movie-title">${movie.title}</div>
-                    <div class="movie-year">${movie.year}</div>
-                </div>
-                <div class="movie-tag">${movie.type}</div>
-            `;
-            
-            div.onclick = () => {
-                div.classList.toggle('done');
-                completedCount = document.querySelectorAll('.movie-item.done').length;
-                updateProgress();
-            };
-            
-            listElement.appendChild(div);
-        });
-    }
+const oneshotData = [
+  { n:"E1", title:"Marvel One-Shot: Agent Carter", year:"2013", note:"Watch after Captain America: TFA" },
+  { n:"E2", title:"Marvel One-Shot: A Funny Thing Happened…", year:"2011", note:"Watch after Iron Man 2" },
+  { n:"E3", title:"Marvel One-Shot: The Consultant", year:"2011", note:"Watch after Thor" },
+  { n:"E4", title:"Item 47", year:"2012", note:"Watch after The Avengers" },
+  { n:"E5", title:"Marvel One-Shot: All Hail the King", year:"2014", note:"After Iron Man 3 — Trevor Slattery" },
+];
 
-    renderMovies();
-    updateProgress();
+const specialsData = [
+  { n:"S1", title:"Werewolf By Night", year:"2022", note:"Disney+ Halloween Special" },
+  { n:"S2", title:"The Guardians of the Galaxy Holiday Special", year:"2022", note:"Disney+ Christmas Special" },
+  { n:"S3", title:"The Punisher: One Last Kill", year:"2026", note:"Disney+ TV Special — upcoming", upcoming:true },
+];
+
+const animatedData = [
+  { n:"A1", title:"What If...? S1", year:"2021", note:"Animated — alternate universes" },
+  { n:"A2", title:"What If...? S2", year:"2023", note:"Animated" },
+  { n:"A3", title:"What If...? S3", year:"2024", note:"Animated" },
+  { n:"A4", title:"I Am Groot S1", year:"2022", note:"Animated shorts — Baby Groot" },
+  { n:"A5", title:"I Am Groot S2", year:"2023", note:"Animated shorts" },
+  { n:"A6", title:"X-Men '97 S1", year:"2024", note:"Animated — MCU connected" },
+  { n:"A7", title:"X-Men '97 S2", year:"2026", note:"Animated — upcoming", upcoming:true },
+  { n:"A8", title:"Marvel Zombies S1", year:"2025", note:"Animated — after Endgame" },
+  { n:"A9", title:"Eyes of Wakanda", year:"2025", note:"Animated — ancient Wakanda" },
+  { n:"A10", title:"Your Friendly Neighborhood Spider-Man S1", year:"2025", note:"Animated" },
+  { n:"A11", title:"Your Friendly Neighborhood Spider-Man S2", year:"2026", note:"Animated — upcoming", upcoming:true },
+];
+
+function getWatched(key) {
+  try { return JSON.parse(localStorage.getItem('marvel_' + key) || '[]'); }
+  catch(e) { return []; }
+}
+function setWatched(key, arr) {
+  try { localStorage.setItem('marvel_' + key, JSON.stringify(arr)); }
+  catch(e) {}
+}
+function toggleItem(storageKey, id, el) {
+  var watched = getWatched(storageKey);
+  var idx = watched.indexOf(id);
+  if (idx === -1) { watched.push(id); el.classList.add('watched'); }
+  else { watched.splice(idx, 1); el.classList.remove('watched'); }
+  setWatched(storageKey, watched);
+  updateProgress();
+}
+
+function typeClass(t) {
+  if (t === 'show') return 'show';
+  if (t === 'animated') return 'animated';
+  return '';
+}
+function typeLabel(t) {
+  if (t === 'show') return 'Show';
+  if (t === 'animated') return 'Animated';
+  return 'Movie';
+}
+
+function renderItem(item, storageKey, gridId) {
+  var grid = document.getElementById(gridId);
+  if (!grid) return;
+  var watched = getWatched(storageKey);
+  var isWatched = watched.indexOf(String(item.n)) !== -1;
+  var isUpcoming = item.upcoming;
+
+  var div = document.createElement('div');
+  div.className = 'item' + (isWatched ? ' watched' : '');
+
+  var badgeHtml = '<span class="badge ' + (isUpcoming ? 'upcoming' : typeClass(item.type || '')) + '">' +
+    (isUpcoming ? 'Upcoming' : typeLabel(item.type || 'movie')) + '</span>';
+
+  div.innerHTML =
+    '<div class="item-num">' + item.n + '</div>' +
+    '<div class="checkbox">' +
+      '<svg width="13" height="13" viewBox="0 0 13 13" fill="none">' +
+        '<path d="M2 6.5l3.5 3.5 5.5-6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '</svg>' +
+    '</div>' +
+    '<div class="item-info">' +
+      '<div class="item-title">' + item.title + '</div>' +
+      '<div class="item-meta">' +
+        '<span>' + (item.year || '') + '</span>' +
+        badgeHtml +
+        (item.note ? '<span>' + item.note + '</span>' : '') +
+      '</div>' +
+    '</div>';
+
+  div.addEventListener('click', function() {
+    toggleItem(storageKey, String(item.n), div);
+  });
+  grid.appendChild(div);
+}
+
+function buildMCU() {
+  Object.keys(mcuPhases).forEach(function(p) {
+    var gridId = 'mcu-grid-' + p;
+    mcuPhases[p].forEach(function(item) { renderItem(item, 'mcu', gridId); });
+  });
+}
+function buildXMen() {
+  xmenData.forEach(function(i) { renderItem(i, 'xmen', 'xmen-grid'); });
+  f4Data.forEach(function(i) { renderItem(i, 'f4', 'f4-grid'); });
+}
+function buildExtras() {
+  oneshotData.forEach(function(i) { renderItem(i, 'extras_oneshot', 'oneshot-grid'); });
+  specialsData.forEach(function(i) { renderItem(i, 'extras_specials', 'specials-grid'); });
+  animatedData.forEach(function(i) { renderItem(i, 'extras_animated', 'animated-grid'); });
+}
+
+function countAll(page) {
+  if (page === 'mcu') {
+    var t = 0; Object.keys(mcuPhases).forEach(function(p) { t += mcuPhases[p].length; }); return t;
+  }
+  if (page === 'xmen') return xmenData.length + f4Data.length;
+  if (page === 'extras') return oneshotData.length + specialsData.length + animatedData.length;
+  return 0;
+}
+function countWatched(page) {
+  if (page === 'mcu') return getWatched('mcu').length;
+  if (page === 'xmen') return getWatched('xmen').length + getWatched('f4').length;
+  if (page === 'extras') return getWatched('extras_oneshot').length + getWatched('extras_specials').length + getWatched('extras_animated').length;
+  return 0;
+}
+function updateProgress() {
+  var names = { mcu: 'MCU PROGRESS', xmen: 'X-MEN & F4 PROGRESS', extras: 'EXTRAS PROGRESS' };
+  var total = countAll(currentPage);
+  var watched = countWatched(currentPage);
+  var pct = total > 0 ? Math.round((watched / total) * 100) : 0;
+  document.getElementById('progressLabel').textContent = names[currentPage] || 'PROGRESS';
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressCount').textContent = watched + ' / ' + total + ' (' + pct + '%)';
+}
+
+var currentPage = 'mcu';
+function showPage(name) {
+  currentPage = name;
+  document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById('page-' + name).classList.add('active');
+  var tabs = document.querySelectorAll('.tab-btn');
+  var map = { mcu:0, xmen:1, extras:2 };
+  tabs.forEach(function(t, i) { t.classList.toggle('active', i === map[name]); });
+  updateProgress();
+  window.scrollTo(0, 0);
+}
+function resetPage(page) {
+  if (!confirm('Reset all progress for this section?')) return;
+  var items;
+  if (page === 'mcu') { localStorage.removeItem('marvel_mcu'); items = document.querySelectorAll('#page-mcu .item'); }
+  else if (page === 'xmen') { localStorage.removeItem('marvel_xmen'); localStorage.removeItem('marvel_f4'); items = document.querySelectorAll('#page-xmen .item'); }
+  else if (page === 'extras') { localStorage.removeItem('marvel_extras_oneshot'); localStorage.removeItem('marvel_extras_specials'); localStorage.removeItem('marvel_extras_animated'); items = document.querySelectorAll('#page-extras .item'); }
+  items.forEach(function(el) { el.classList.remove('watched'); });
+  updateProgress();
+}
+
+buildMCU();
+buildXMen();
+buildExtras();
+updateProgress();
 </script>
-
 </body>
-</html>
+                                                       </html>
