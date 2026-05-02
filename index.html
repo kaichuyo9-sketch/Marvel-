@@ -19,8 +19,6 @@
   --white:    #F0F0F0;
   --grey:     #666666;
   --border:   rgba(255, 255, 255, 0.1);
-  
-  /* Initial Theme: Sith */
   --accent:   var(--red);
   --glow:     rgba(192, 24, 26, 0.6);
 }
@@ -35,7 +33,6 @@ html { scroll-behavior: smooth; }
 
 body {
   background: var(--bg);
-  /* Vader vs Luke Background */
   background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), 
                     url('https://wallpaperaccess.com/full/11933.jpg'); 
   background-attachment: fixed;
@@ -46,7 +43,6 @@ body {
   overflow-x: hidden;
 }
 
-/* ── SCAN LINES ── */
 body::after {
   content: '';
   position: fixed; inset: 0;
@@ -54,113 +50,46 @@ body::after {
   pointer-events: none; z-index: 999;
 }
 
-/* ══════════════════════════════════════
-   HEADER & 3D LOGO
-══════════════════════════════════════ */
-.hdr {
-  text-align: center;
-  padding: 60px 20px 20px;
-  position: relative;
-}
+.hdr { text-align: center; padding: 60px 20px 20px; position: relative; }
 
 .marvel-logo-box {
-  display: inline-block;
-  padding: 8px 25px;
-  background: var(--accent);
+  display: inline-block; padding: 8px 25px; background: var(--accent);
   transform: perspective(500px) rotateX(10deg);
   box-shadow: 0 10px 20px rgba(0,0,0,0.5), 0 0 15px var(--glow);
-  border: 1px solid rgba(255,255,255,0.2);
-  transition: all 0.5s ease;
+  border: 1px solid rgba(255,255,255,0.2); transition: all 0.5s ease;
 }
 
-.marvel-logo-text {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(60px, 12vw, 100px);
-  letter-spacing: 2px; color: #fff;
-}
+.marvel-logo-text { font-family: 'Bebas Neue', sans-serif; font-size: clamp(60px, 12vw, 100px); letter-spacing: 2px; color: #fff; }
 
-.tagline {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 11px; letter-spacing: 5px;
-  color: var(--grey); text-transform: uppercase; margin-top: 15px;
-}
+.tagline { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 5px; color: var(--grey); text-transform: uppercase; margin-top: 15px; }
 
-/* ══════════════════════════════════════
-   LIGHTSABER PROGRESS
-══════════════════════════════════════ */
-.prog-strip {
-  background: rgba(0,0,0,0.5);
-  padding: 20px;
-  backdrop-filter: blur(5px);
-  border-bottom: 1px solid var(--border);
-}
+.prog-strip { background: rgba(0,0,0,0.5); padding: 20px; backdrop-filter: blur(5px); border-bottom: 1px solid var(--border); }
 .prog-inner { max-width: 600px; margin: 0 auto; }
 .prog-row { display: flex; justify-content: space-between; margin-bottom: 8px; }
 .prog-label { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; letter-spacing: 2px; }
 
-.saber-track {
-  height: 4px; background: #1a1a1a; border-radius: 4px; position: relative;
-}
-.saber-fill {
-  height: 100%; width: 0%;
-  background: #fff;
-  border-radius: 4px;
-  box-shadow: 0 0 10px #fff, 0 0 20px var(--accent);
-  transition: width 1s ease;
-}
+.saber-track { height: 4px; background: #1a1a1a; border-radius: 4px; position: relative; }
+.saber-fill { height: 100%; width: 0%; background: #fff; border-radius: 4px; box-shadow: 0 0 10px #fff, 0 0 20px var(--accent); transition: width 1s ease; }
 
-/* ══════════════════════════════════════
-   NAVIGATION
-══════════════════════════════════════ */
 .nav { display: flex; justify-content: center; gap: 5px; margin: 20px 0; flex-wrap: wrap; }
-.ntab {
-  background: transparent; border: 1px solid var(--border); color: var(--grey);
-  padding: 10px 20px; font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 700; cursor: pointer; transition: 0.3s;
-}
+.ntab { background: transparent; border: 1px solid var(--border); color: var(--grey); padding: 10px 20px; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; cursor: pointer; transition: 0.3s; }
 .ntab.active { background: var(--accent); color: white; border-color: var(--accent); box-shadow: 0 0 10px var(--glow); }
 
-/* ══════════════════════════════════════
-   CARDS & ITEMS
-══════════════════════════════════════ */
-.grid {
-  max-width: 1200px; margin: 0 auto;
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: 20px; padding: 20px;
-}
-.card {
-  background: var(--bg2);
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--border);
-  border-top: 3px solid var(--accent);
-  transition: 0.3s;
-}
+.grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px; padding: 20px; }
+.card { background: var(--bg2); backdrop-filter: blur(10px); border: 1px solid var(--border); border-top: 3px solid var(--accent); transition: 0.3s; }
 .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.4); border-color: var(--accent); }
 
 .card-hdr { padding: 15px 20px; border-bottom: 1px solid var(--border); }
 .card-title { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 800; text-transform: uppercase; }
 
-.item {
-  display: flex; align-items: center; gap: 12px; padding: 12px 20px;
-  cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.03);
-}
+.item { display: flex; align-items: center; gap: 12px; padding: 12px 20px; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.03); }
 .item:hover { background: rgba(255,255,255,0.05); }
 .item.done { opacity: 0.3; }
 
-.chk {
-  width: 16px; height: 16px; border: 2px solid var(--accent);
-  display: flex; align-items: center; justify-content: center; font-size: 10px;
-}
+.chk { width: 16px; height: 16px; border: 2px solid var(--accent); display: flex; align-items: center; justify-content: center; font-size: 10px; }
 .item.done .chk { background: var(--accent); color: white; }
 
-/* ── SIDE TOGGLE ── */
-.side-toggle {
-  position: fixed; bottom: 20px; right: 20px;
-  width: 50px; height: 50px; border-radius: 50%;
-  background: var(--accent); border: 2px solid #fff;
-  cursor: pointer; z-index: 1000; box-shadow: 0 0 15px var(--glow);
-  display: flex; align-items: center; justify-content: center;
-}
+.side-toggle { position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px; border-radius: 50%; background: var(--accent); border: 2px solid #fff; cursor: pointer; z-index: 1000; box-shadow: 0 0 15px var(--glow); display: flex; align-items: center; justify-content: center; }
 
 .page { display: none; }
 .page.active { display: block; animation: fadeIn 0.4s ease; }
@@ -171,9 +100,7 @@ body::after {
 <body class="sith-side">
 
 <div class="hdr">
-  <div class="marvel-logo-box" id="logoBox">
-    <span class="marvel-logo-text">MARVEL</span>
-  </div>
+  <div class="marvel-logo-box" id="logoBox"><span class="marvel-logo-text">MARVEL</span></div>
   <div class="tagline">The Infinity Watchlist — Choose Your Side</div>
 </div>
 
@@ -183,9 +110,7 @@ body::after {
       <span class="prog-label" id="sideStatus">SITH LORD PROGRESS</span>
       <span class="prog-label" id="progPercent">0%</span>
     </div>
-    <div class="saber-track">
-      <div class="saber-fill" id="mainBar"></div>
-    </div>
+    <div class="saber-track"><div class="saber-fill" id="mainBar"></div></div>
   </div>
 </div>
 
@@ -195,24 +120,15 @@ body::after {
   <button class="ntab" onclick="showPage('extra')">ANIMATED / EXTRAS</button>
 </div>
 
-<div id="page-mcu" class="page active">
-  <div class="grid" id="mcu-grid"></div>
-</div>
-
-<div id="page-xmen" class="page">
-  <div class="grid" id="xmen-grid"></div>
-</div>
-
-<div id="page-extra" class="page">
-  <div class="grid" id="extra-grid"></div>
-</div>
+<div id="page-mcu" class="page active"><div class="grid" id="mcu-grid"></div></div>
+<div id="page-xmen" class="page"><div class="grid" id="xmen-grid"></div></div>
+<div id="page-extra" class="page"><div class="grid" id="extra-grid"></div></div>
 
 <button class="side-toggle" onclick="toggleSide()">
   <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M12 2L4.5 20.29L5.21 21L12 18L18.79 21L19.5 20.29L12 2Z"/></svg>
 </button>
 
 <script>
-/* ── DATA ── */
 const DATA = {
   mcu: [
     { title: "Phase 1: Infinity Saga", items: ["Iron Man", "The Incredible Hulk", "Iron Man 2", "Thor", "Captain America: TFA", "The Avengers"] },
