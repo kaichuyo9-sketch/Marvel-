@@ -199,4 +199,118 @@
         }
 
         .movie-tag {
-            font-family: '
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 10px;
+            border: 1px solid var(--text-grey);
+            padding: 2px 8px;
+            text-transform: uppercase;
+        }
+
+        .empty-state {
+            text-align: center;
+            color: var(--text-grey);
+            padding: 40px;
+            border: 1px dashed var(--border);
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="logo-badge">MARVEL</div>
+    <div class="nav-links">
+        <a href="#" class="active">MCU Universe</a>
+        <a href="#">X-Men & Fan</a>
+    </div>
+</nav>
+
+<header class="hero">
+    <h2>Your Complete Marvel Watch Companion</h2>
+    <h1>MARVEL STUDIOS</h1>
+    <p style="color: var(--text-grey); font-family: 'Barlow Condensed'; letter-spacing: 2px;">THE INFINITY WATCHLIST · CHRONOLOGICAL ORDER</p>
+    
+    <div class="stones">
+        <div class="stone-item"><div class="stone" style="background: var(--space);"></div>Space</div>
+        <div class="stone-item"><div class="stone" style="background: var(--reality);"></div>Reality</div>
+        <div class="stone-item"><div class="stone" style="background: var(--power);"></div>Power</div>
+        <div class="stone-item"><div class="stone" style="background: var(--time);"></div>Time</div>
+        <div class="stone-item"><div class="stone" style="background: var(--mind);"></div>Mind</div>
+        <div class="stone-item"><div class="stone" style="background: var(--soul);"></div>Soul</div>
+    </div>
+</header>
+
+<div class="main-progress">
+    <span style="font-family: 'Barlow Condensed'; font-size: 12px; letter-spacing: 1px;">MCU UNIVERSE PROGRESS</span>
+    <div class="progress-track">
+        <div class="progress-fill" id="global-progress"></div>
+    </div>
+    <span id="progress-text">0 / 0 — 0%</span>
+</div>
+
+<div class="list-container">
+    <div class="phase-header">
+        <div class="phase-title">
+            <span style="color: var(--marvel-red); font-size: 10px; font-weight: 800; letter-spacing: 2px;">YOUR CUSTOM LIST</span>
+            <h3>WATCHLIST ENTRIES</h3>
+        </div>
+        <div id="phase-percent" style="font-family: 'Barlow Condensed'; font-size: 32px; font-weight: 800;">0%</div>
+    </div>
+
+    <div id="movie-list">
+        <div class="empty-state">No movies added yet. Edit the code to add your favorites!</div>
+    </div>
+</div>
+
+<script>
+    /* HOW TO ADD MOVIES:
+       Add your items inside the brackets below using this format:
+       { title: "Movie Name", year: "Release Year", type: "Movie or Series" },
+    */
+    const movies = [
+        // Example: { title: "Iron Man", year: "2008", type: "Movie" },
+    ];
+
+    const listElement = document.getElementById('movie-list');
+    let completedCount = 0;
+
+    function updateProgress() {
+        const total = movies.length;
+        const percent = total > 0 ? Math.round((completedCount / total) * 100) : 0;
+        
+        document.getElementById('global-progress').style.width = percent + '%';
+        document.getElementById('progress-text').innerText = `${completedCount} / ${total} — ${percent}%`;
+        document.getElementById('phase-percent').innerText = `${percent}%`;
+    }
+
+    function renderMovies() {
+        if (movies.length === 0) return;
+        
+        listElement.innerHTML = '';
+        movies.forEach((movie, index) => {
+            const div = document.createElement('div');
+            div.className = 'movie-item';
+            div.innerHTML = `
+                <div class="checkbox"></div>
+                <div class="movie-info">
+                    <div class="movie-title">${movie.title}</div>
+                    <div class="movie-year">${movie.year}</div>
+                </div>
+                <div class="movie-tag">${movie.type}</div>
+            `;
+            
+            div.onclick = () => {
+                div.classList.toggle('done');
+                completedCount = document.querySelectorAll('.movie-item.done').length;
+                updateProgress();
+            };
+            
+            listElement.appendChild(div);
+        });
+    }
+
+    renderMovies();
+    updateProgress();
+</script>
+
+</body>
+</html>
