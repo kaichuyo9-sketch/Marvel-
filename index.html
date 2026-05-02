@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,7 +12,6 @@
             --card-bg: #161616;
             --border: #2a2a2a;
             --text-grey: #8a8a8a;
-            /* Stone Colors */
             --space: #4d8ef5; --reality: #EC1D24; --power: #9b4de0;
             --time: #18b878; --mind: #d4a800; --soul: #e06418;
         }
@@ -25,7 +24,6 @@
             padding: 0;
         }
 
-        /* Top Navigation */
         nav {
             background: black;
             border-bottom: 1px solid var(--border);
@@ -63,7 +61,6 @@
             padding-bottom: 18px;
         }
 
-        /* Hero Section */
         .hero {
             text-align: center;
             padding: 60px 20px;
@@ -86,7 +83,6 @@
             margin: 10px 0;
         }
 
-        /* Infinity Stones */
         .stones {
             display: flex;
             justify-content: center;
@@ -110,7 +106,6 @@
             box-shadow: 0 0 10px rgba(255,255,255,0.2);
         }
 
-        /* Progress Bar Section */
         .main-progress {
             background: var(--card-bg);
             padding: 20px;
@@ -129,11 +124,10 @@
         .progress-fill {
             height: 100%;
             background: var(--marvel-red);
-            width: 0%; /* Will be updated by JS */
+            width: 0%;
             transition: width 0.3s;
         }
 
-        /* List Section */
         .list-container {
             max-width: 800px;
             margin: 40px auto;
@@ -205,112 +199,4 @@
         }
 
         .movie-tag {
-            font-family: 'Barlow Condensed', sans-serif;
-            font-size: 10px;
-            border: 1px solid var(--text-grey);
-            padding: 2px 8px;
-            text-transform: uppercase;
-        }
-    </style>
-</head>
-<body>
-
-<nav>
-    <div class="logo-badge">MARVEL</div>
-    <div class="nav-links">
-        <a href="#" class="active">MCU Universe</a>
-        <a href="#">X-Men & Fan</a>
-    </div>
-</nav>
-
-<header class="hero">
-    <h2>Your Complete Marvel Watch Companion</h2>
-    <h1>MARVEL STUDIOS</h1>
-    <p style="color: var(--text-grey); font-family: 'Barlow Condensed'; letter-spacing: 2px;">THE INFINITY WATCHLIST · CHRONOLOGICAL ORDER</p>
-    
-    <div class="stones">
-        <div class="stone-item"><div class="stone" style="background: var(--space);"></div>Space</div>
-        <div class="stone-item"><div class="stone" style="background: var(--reality);"></div>Reality</div>
-        <div class="stone-item"><div class="stone" style="background: var(--power);"></div>Power</div>
-        <div class="stone-item"><div class="stone" style="background: var(--time);"></div>Time</div>
-        <div class="stone-item"><div class="stone" style="background: var(--mind);"></div>Mind</div>
-        <div class="stone-item"><div class="stone" style="background: var(--soul);"></div>Soul</div>
-    </div>
-</header>
-
-<div class="main-progress">
-    <span style="font-family: 'Barlow Condensed'; font-size: 12px; letter-spacing: 1px;">MCU UNIVERSE PROGRESS</span>
-    <div class="progress-track">
-        <div class="progress-fill" id="global-progress"></div>
-    </div>
-    <span id="progress-text">0 / 64 — 0%</span>
-</div>
-
-<div class="list-container">
-    <div class="phase-header">
-        <div class="phase-title">
-            <span style="color: var(--marvel-red); font-size: 10px; font-weight: 800; letter-spacing: 2px;">PHASE 1 · SPACE STONE</span>
-            <h3>THE INFINITY SAGA BEGINS</h3>
-        </div>
-        <div style="font-family: 'Barlow Condensed'; font-size: 32px; font-weight: 800;">0%</div>
-    </div>
-
-    <div id="movie-list">
-        </div>
-</div>
-
-<script>
-    // Sample Data
-    const movies = [
-        { title: "Captain America: The First Avenger", year: "1942", type: "Movie" },
-        { title: "Captain Marvel", year: "1995", type: "Movie" },
-        { title: "Iron Man", year: "2008", type: "Movie" },
-        { title: "Iron Man 2", year: "2010", type: "Movie" },
-        { title: "The Incredible Hulk", year: "2008", type: "Movie" },
-        { title: "Thor", year: "2011", type: "Movie" },
-        { title: "The Avengers", year: "2012", type: "Movie" }
-    ];
-
-    const listElement = document.getElementById('movie-list');
-    let completedCount = 0;
-
-    function updateProgress() {
-        const percent = Math.round((completedCount / movies.length) * 100);
-        document.getElementById('global-progress').style.width = percent + '%';
-        document.getElementById('progress-text').innerText = `${completedCount} / ${movies.length} — ${percent}%`;
-    }
-
-    function renderMovies() {
-        listElement.innerHTML = '';
-        movies.forEach((movie, index) => {
-            const div = document.createElement('div');
-            div.className = 'movie-item';
-            div.innerHTML = `
-                <div class="checkbox"></div>
-                <div class="movie-info">
-                    <div class="movie-title">${movie.title}</div>
-                    <div class="movie-year">${movie.year}</div>
-                </div>
-                <div class="movie-tag">${movie.type}</div>
-            `;
-            
-            div.onclick = () => {
-                div.classList.toggle('done');
-                if (div.classList.contains('done')) {
-                    completedCount++;
-                } else {
-                    completedCount--;
-                }
-                updateProgress();
-            };
-            
-            listElement.appendChild(div);
-        });
-    }
-
-    renderMovies();
-    updateProgress();
-</script>
-
-</body>
-</html>
+            font-family: '
